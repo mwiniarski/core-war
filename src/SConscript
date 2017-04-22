@@ -1,0 +1,10 @@
+# -*- python -*-
+Import('env')
+
+lib = env.StaticLibrary('lib', ['Alu.cpp', 'Ram.cpp'])
+
+env.BoostTests(Glob('tests/*.cpp'), lib)
+
+p = env.Program('core-war', ['main.cpp'] ,LIBS=[lib])
+
+Return('p')
