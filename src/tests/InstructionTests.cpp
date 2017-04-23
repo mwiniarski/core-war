@@ -10,8 +10,7 @@ BOOST_AUTO_TEST_SUITE(InstructionTests)
 
 BOOST_AUTO_TEST_CASE(instruction_get_opcode_and_optypes_works)
 {
-    Iarg a, b;
-    Instruction i(Iop::DAT, a, b);
+    Instruction i;
     BOOST_CHECK_EQUAL(i.getOp(), Iop::DAT);
 }
 
@@ -30,23 +29,7 @@ BOOST_AUTO_TEST_CASE(instruction_struct_assigning)
     Instruction i(Iop::MOV, a, b);
     BOOST_CHECK_EQUAL(i.getA().addr, 123);
     BOOST_CHECK_EQUAL(i.getB().sign, '@');
-}
-
-BOOST_AUTO_TEST_CASE(instruction_constructors)
-{
-    Iarg a{1, '@'};
-    int b = 2;
-    Instruction i(Iop::MOV, a, b);
-
-    BOOST_CHECK_EQUAL(i.getA().addr, 1);
-    BOOST_CHECK_EQUAL(i.getA().sign, '@');
-    BOOST_CHECK_EQUAL(i.getB().addr, 2);
-    BOOST_CHECK_EQUAL(i.getB().sign, 0);
-}
-
-BOOST_AUTO_TEST_CASE(instruction_wrong_sign_trows_error)
-{
-    BOOST_CHECK_THROW(Instruction(Iop::MOV, 1, {2, 'Z'}), std::runtime_error);
+    BOOST_CHECK_EQUAL(i.getA().sign, 0);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

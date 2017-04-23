@@ -1,32 +1,11 @@
 #include "Instruction.h"
 
+Instruction::Instruction()
+    :opcode(Op::DAT), argA({0}), argB({0})
+{}
+
 Instruction::Instruction(Op op_, Arg a_, Arg b_)
     :opcode(op_), argA(a_), argB(b_)
-{
-    char allowedSigns[4] = {'<', '@', '#', 0};
-
-    int t = 0;
-    for(int i=0; i < 4; i++){
-        if(a_.sign == allowedSigns[i])
-            t++;
-        if(b_.sign == allowedSigns[i])
-            t++;
-    }
-
-    if(t != 2)
-        throwInstructionError("sign not allowed");
-}
-
-Instruction::Instruction(Op op_, Arg a_, int b_)
-    :Instruction(op_, a_, Arg{b_})
-{}
-
-Instruction::Instruction(Op op_, int a_, Arg b_)
-    :Instruction(op_, Arg{a_}, b_)
-{}
-
-Instruction::Instruction(Op op_, int a_, int b_)
-    :Instruction(op_, Arg{a_}, Arg{b_})
 {}
 
 const std::string Instruction::OpNames[(int)Op::COUNT] = {
@@ -43,6 +22,14 @@ Instruction::Op Instruction::findOp(std::string op) {
     return Op::ERROR;
 }
 
+bool isAllowed(char c) {
+    const char allowedSigns[4] = {'<', '@', '#', 0};
+    for(int i=0; i<4; i++){
+        if(c == allowedSigns[i])
+            return true;
+    }
+    return false;
+}
 void Instruction::throwInstructionError(std::string msg)
 {
     throw std::runtime_error("Instruction error: " + msg);

@@ -21,15 +21,17 @@ public:
         char sign = 0;
     };
 
+    Instruction();
     Instruction(Op op_, Arg a_, Arg b_);
-    Instruction(Op op_, Arg a_, int b_);
-    Instruction(Op op_, int a_, Arg b_);
-    Instruction(Op op_, int a_, int b_);
 
-    Arg getA(){return argA; }
-    Arg getB(){return argB; }
+    Arg getA(){ return argA; }
+    Arg getB(){ return argB; }
+    void setA(Arg a) { argA = a; }
+    void setB(Arg a) { argB = a; }
+
     Op getOp(){ return opcode; }
 
+    static bool isAllowed(char c);
     static Op findOp(std::string op);
     static std::string toString(Op op){ return OpNames[(int)op]; }
 private:
