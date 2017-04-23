@@ -2,6 +2,7 @@
 #define PARSER_H_
 
 #include <string>
+#include <iostream>
 
 class Parser
 {
@@ -9,6 +10,7 @@ public:
     Parser();
 
 private:
+    //std::istream in;
     void throwParserError(std::string msg);
 };
 

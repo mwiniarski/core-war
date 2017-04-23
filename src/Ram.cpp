@@ -5,7 +5,7 @@
 Ram::Ram(int size)
     :MEMORY_SIZE(size)
 {
-    memory = new Instruction[MEMORY_SIZE];
+    memory = std::make_unique<Instruction[]>(MEMORY_SIZE);
 }
 
 void Ram::setInstruction(int address, Instruction i) {
