@@ -13,6 +13,8 @@ public:
 
     void setInstruction(int address, Instruction i);
     Instruction getInstruction(int address);
+
+    int getMemorySize() {return MEMORY_SIZE;}
 private:
     const int MEMORY_SIZE;
     std::unique_ptr<Instruction[]> memory;

@@ -2,7 +2,7 @@
 
 #include <stdexcept>
 
-Parser::Parser(std::istream& in1_)
+Parser::Parser(std::istream& in_)
 :in(in_)
 {
 }
@@ -78,10 +78,13 @@ void Parser::parseLine()
     endLine();
 }
 
-Instruction Parser::getInstruction(){
-    parseLine();
-
-    return Instruction(opCode, {argA, signA}, {argB, signB});
+Instruction Parser::getInstruction()
+{
+    if(!in.eof()){
+        parseLine();
+        return Instruction(opCode, {argA, signA}, {argB, signB});
+    }
+    return Instruction();
 }
 
 
