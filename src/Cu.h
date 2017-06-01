@@ -11,6 +11,7 @@ public:
 
 private:
     std::unique_ptr<Ram> ram;
+    std::unique_ptr<Parser> parser;
     void throwCuError(std::string msg);
 };
 

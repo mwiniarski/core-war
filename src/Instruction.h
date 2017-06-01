@@ -34,6 +34,17 @@ public:
     static bool isAllowed(char c);
     static Op findOp(std::string op);
     static std::string toString(Op op){ return OpNames[(int)op]; }
+
+    std::string to_string() {
+        std::string ret = OpNames[(int)opcode];
+        if(argA.sign != 0)
+            ret += argA.sign;
+        ret += std::to_string(argA.addr);
+        if(argB.sign != 0)
+            ret += argB.sign;
+        return ret += std::to_string(argB.addr);
+    }
+
 private:
     Op opcode;
     Arg argA, argB;

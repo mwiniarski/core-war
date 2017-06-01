@@ -22,9 +22,9 @@ Instruction::Op Instruction::findOp(std::string op) {
     return Op::ERROR;
 }
 
-bool isAllowed(char c) {
-    const char allowedSigns[4] = {'<', '@', '#', 0};
-    for(int i=0; i<4; i++){
+bool Instruction::isAllowed(char c) {
+    const char allowedSigns[3] = {'<', '@', '#'};
+    for(int i=0; i<3; i++){
         if(c == allowedSigns[i])
             return true;
     }
