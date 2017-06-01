@@ -4,12 +4,15 @@ Cu::Cu(std::unique_ptr<Ram> ram_)
     :ram(std::move(ram_))
 {}
 
-void Cu::loadFile(std::string &fileName, bool isFirst)
+void Cu::loadFile(std::string fileName, bool isFirst)
 {
     std::random_device rd;
     std::mt19937 gen(rd());
 
     std::ifstream file(fileName);
+    if(!file.is_open())
+        throwCuError("CANT OPEN FILE");
+
     parser = std::make_unique<Parser>(file);
 
     int start, stop;
@@ -34,8 +37,6 @@ void Cu::loadFile(std::string &fileName, bool isFirst)
         address++;
         instruction = parser->getInstruction();
     }
-
-
 }
 
 void Cu::throwCuError(std::string msg){

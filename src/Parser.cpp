@@ -35,18 +35,8 @@ char Parser::getChar() {
 }
 
 void Parser::whitespace(){
-    if(getChar() != ' ')
-        throwParserError("required whitespece");
-}
-
-void Parser::endLine() {
-    while(in.peek() == ' ')
+    while(in.peek() == ' ' || in.peek() == '\n')
         getChar();
-
-    if(in.peek() != '\n')
-        throwParserError("can't reach newline");
-
-    getChar();
 }
 
 void Parser::parseLine()
@@ -75,7 +65,7 @@ void Parser::parseLine()
         signB = getChar();
 
     argB = getNumber();
-    endLine();
+    whitespace();
 }
 
 Instruction Parser::getInstruction()

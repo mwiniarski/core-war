@@ -10,9 +10,8 @@ using namespace std;
 
 int main()
 {
-    std::istringstream in("MOV @1, <-5 \nADD 1, #177 \n");
-    Parser p(in);
-    p.getInstruction();
-    p.getInstruction();
+    Cu c(std::make_unique<Ram>(20));
+    
+    c.loadFile("src/tests/test_files/test1", true);
     return 0;
 }
