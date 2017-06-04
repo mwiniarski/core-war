@@ -5,6 +5,7 @@
 #include "Ram.h"
 #include "Alu.h"
 #include "Fifo.h"
+#include "Printer.h"
 #include <string>
 #include <stdexcept>
 #include <fstream>

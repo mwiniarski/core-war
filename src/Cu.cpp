@@ -1,8 +1,10 @@
 #include "Cu.h"
 
 Cu::Cu(std::shared_ptr<Ram> ram_)
-    :ram(std::move(ram_))
-{}
+    :ram(ram_)
+{
+    alu = std::make_unique<Alu>(ram_);
+}
 
 void Cu::loadFile(std::string fileName, bool isFirst)
 {
@@ -78,6 +80,8 @@ void Cu::run()
 {
     int program = 1, address;
 
+    Printer p(ram);
+
     while(true)
     {
         program = !program;
@@ -108,9 +112,10 @@ void Cu::run()
         }
 
         fifo[program]->set(address);
+        p.print(address);
     }
-
-    std::cout << "The winner is program " << !program << " !" << std::endl;
+    
+    p.winner(program);
 }
 
 void Cu::throwCuError(std::string msg){

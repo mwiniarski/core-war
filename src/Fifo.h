@@ -13,7 +13,8 @@ public:
     void add(int addr_);
     void remove();
     void set(int addr_);
-    
+    void check();
+
 private:
     std::list<int> address;
     std::list<int>::iterator iter;

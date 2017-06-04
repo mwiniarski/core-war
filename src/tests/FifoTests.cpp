@@ -16,8 +16,7 @@ BOOST_AUTO_TEST_CASE(fifo_few_addresses)
 {
     Fifo f(5);
     f.add(3);
-    for(int i=0; i<10; i++)
-        f.getNext();
+    BOOST_CHECK_EQUAL(f.getNext(), 5);
     BOOST_CHECK_EQUAL(f.getNext(), 3);
 }
 
@@ -25,6 +24,7 @@ BOOST_AUTO_TEST_CASE(fifo_remove)
 {
     Fifo f(1);
     f.add(2);
+    f.getNext();
     f.remove();
     BOOST_CHECK_EQUAL(f.getNext(), 2);
     BOOST_CHECK_EQUAL(f.getNext(), 2);

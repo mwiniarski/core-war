@@ -14,6 +14,7 @@ def fill_env_flags(env):
     env.Append(CPPPATH=['#/src'])
     env.Append(CCFLAGS=['-Wall', '-Wextra', '-Wpedantic', '-Werror'])
     env.Append(CCFLAGS=['--std=c++14'])
+    env.Append(LINKFLAGS=['-lncurses'])
 
     if env['debug']:
         env.Append(CCFLAGS=['-O0', '-g'])

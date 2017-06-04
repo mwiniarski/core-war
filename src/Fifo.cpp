@@ -5,7 +5,12 @@
 Fifo::Fifo(int addr_)
 {
     address.push_back(addr_);
-    iter = address.begin();
+    iter = address.end();
+}
+void Fifo::check()
+{
+    if(iter == address.end())
+        iter = address.begin();
 }
 
 int Fifo::getNext()
@@ -13,21 +18,21 @@ int Fifo::getNext()
     if(address.empty())
         return -1;
 
-    if(iter == address.end()) {
-        iter = address.begin();
-        return *iter;
-    }
+    iter++;
+    check();
 
-    return *iter++;
+    return *iter;
 }
 
 void Fifo::remove()
 {
+    check();
     iter = address.erase(iter);
 }
 
 void Fifo::set(int addr_)
 {
+    check();
     *iter = addr_;
 }
 
