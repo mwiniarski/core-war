@@ -25,7 +25,7 @@ BOOST_AUTO_TEST_CASE(ram_increment)
     Ram r(4);
     int addr = 1;
     Instruction a = r.getInstruction(addr);
-    a.setA( {a.getA().addr + 1, a.getA().sign});
+    a.setA(a.getA().addr + 1);
     r.setInstruction(addr, a);
     BOOST_CHECK_EQUAL(r.getInstruction(addr).getA().addr, 1);
 }

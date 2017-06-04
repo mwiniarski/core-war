@@ -2,8 +2,8 @@
 
 #include <stdexcept>
 
-Parser::Parser(std::istream& in_)
-:in(in_)
+Parser::Parser(std::istream& in_, int mem_)
+:in(in_), memorySize(mem_)
 {
 }
 
@@ -24,7 +24,7 @@ int Parser::getNumber()
     while(isdigit(in.peek()))
         ret += getChar();
 
-    return stoi(ret) * sign;
+    return (stoi(ret) % memorySize) * sign;
 }
 
 char Parser::getChar() {

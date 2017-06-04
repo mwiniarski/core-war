@@ -32,4 +32,16 @@ BOOST_AUTO_TEST_CASE(instruction_struct_assigning)
     BOOST_CHECK_EQUAL(i.getA().sign, 0);
 }
 
+BOOST_AUTO_TEST_CASE(instruction_initialization)
+{
+    Instruction i1(Instruction::Op::MOV, {5, '#'}, {1, 0});
+    BOOST_CHECK_EQUAL(i1.getA().addr, 5);
+}
+
+BOOST_AUTO_TEST_CASE(instruction_equal_operator)
+{
+    Instruction i1(Instruction::Op::MOV, {5, '#'}, {1, 0});
+    BOOST_CHECK(i1 == i1);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

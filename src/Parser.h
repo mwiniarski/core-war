@@ -8,10 +8,7 @@
 class Parser
 {
 public:
-    Parser(std::istream& in_);
-
-    Parser(const Parser&) = delete;
-    const Parser& operator=(const Parser&) = delete;
+    Parser(std::istream& in_, int memorySize);
 
     Instruction getInstruction();
 private:
@@ -26,6 +23,7 @@ private:
     int getNumber();
 
     std::istream &in;
+    int memorySize;
     void throwParserError(std::string msg);
 };
 

@@ -10,8 +10,8 @@ using namespace std;
 
 int main()
 {
-    Cu c(std::make_unique<Ram>(20));
+    int i = -5;
+    cout << i%4;
     
-    c.loadFile("src/tests/test_files/test1", true);
     return 0;
 }

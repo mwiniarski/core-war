@@ -9,10 +9,16 @@ Ram::Ram(int size)
 }
 
 void Ram::setInstruction(int address, Instruction i) {
+    address = address % MEMORY_SIZE;
+    if(address < 0)
+        address += MEMORY_SIZE;
     memory[address % MEMORY_SIZE] = i;
 }
 Instruction Ram::getInstruction(int address) {
-    return memory[address % MEMORY_SIZE];
+    address = address % MEMORY_SIZE;
+    if(address < 0)
+        address += MEMORY_SIZE;
+    return memory[address];
 }
 
 void Ram::throwRamError(std::string msg){

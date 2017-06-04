@@ -3,6 +3,8 @@
 
 #include "Parser.h"
 #include "Ram.h"
+#include "Alu.h"
+#include "Fifo.h"
 #include <string>
 #include <stdexcept>
 #include <fstream>
@@ -13,14 +15,20 @@
 class Cu
 {
 public:
-    Cu(std::unique_ptr<Ram> ram_);
+    Cu(std::shared_ptr<Ram> ram_);
 
+    void run();
     void loadFile(std::string fileName, bool isFirst);
-    std::unique_ptr<Ram> ram;
-private:
 
-    std::unique_ptr<Parser> parser;
+    std::shared_ptr<Ram> ram;
+
+private:
+    std::pair<int, int> processSpl(int address);
+    int process(Instruction::Op op, int address);
     void throwCuError(std::string msg);
+
+    std::unique_ptr<Fifo> fifo[2];
+    std::unique_ptr<Alu> alu;
 };
 
 #endif // CU_H_

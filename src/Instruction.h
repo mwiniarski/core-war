@@ -9,7 +9,7 @@ class Instruction
 public:
     enum class Op {
         //opcodes
-        DAT=0, MOV, ADD, SUB, JPM, JMZ,
+        DAT=0, MOV, ADD, SUB, JMP, JMZ,
         JMN, CMP, SLT, DJN, SPL,
 
         //helpers
@@ -26,14 +26,15 @@ public:
 
     Arg getA(){ return argA; }
     Arg getB(){ return argB; }
-    void setA(Arg a) { argA = a; }
-    void setB(Arg a) { argB = a; }
+    void setA(int a) { argA.addr = a; }
+    void setB(int a) { argB.addr = a; }
 
     Op getOp(){ return opcode; }
 
     static bool isAllowed(char c);
     static Op findOp(std::string op);
     static std::string toString(Op op){ return OpNames[(int)op]; }
+    bool operator==(const Instruction& rhs);
 
     std::string to_string() {
         std::string ret = OpNames[(int)opcode];
@@ -44,7 +45,7 @@ public:
             ret += argB.sign;
         return ret += std::to_string(argB.addr);
     }
-
+    
 private:
     Op opcode;
     Arg argA, argB;

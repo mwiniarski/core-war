@@ -9,7 +9,7 @@ Instruction::Instruction(Op op_, Arg a_, Arg b_)
 {}
 
 const std::string Instruction::OpNames[(int)Op::COUNT] = {
-    "DAT", "MOV", "ADD", "SUB", "JPM", "JMZ",
+    "DAT", "MOV", "ADD", "SUB", "JMP", "JMZ",
     "JMN", "CMP", "SLT", "DJN", "SPL"
 };
 
@@ -33,4 +33,13 @@ bool Instruction::isAllowed(char c) {
 void Instruction::throwInstructionError(std::string msg)
 {
     throw std::runtime_error("Instruction error: " + msg);
+}
+
+bool Instruction::operator==(const Instruction& rhs)
+{
+    return opcode == rhs.opcode &&
+           argA.sign == rhs.argA.sign &&
+           argB.sign == rhs.argB.sign &&
+           argB.addr == rhs.argB.addr &&
+           argA.addr == rhs.argA.addr;
 }

@@ -11,6 +11,9 @@ class Ram
 public:
     Ram(int size);
 
+    Ram(const Ram&) = delete;
+    const Ram& operator=(const Ram&) = delete;
+
     void setInstruction(int address, Instruction i);
     Instruction getInstruction(int address);
 
